@@ -295,8 +295,14 @@ public class BookingFactTableTablePage extends AbstractFrwDeluxeTablePage<Table>
       }
 
       @Override
-      protected void execAction() {
+      protected String getConfiguredIconId() {
+        return Icons.Remove;
+      }
 
+      @Override
+      protected void execAction() {
+        BEANS.get(IRevealService.class).unrevealBookingFacts(getKeyColumn().getValues());
+        reloadPage();
       }
     }
   }
