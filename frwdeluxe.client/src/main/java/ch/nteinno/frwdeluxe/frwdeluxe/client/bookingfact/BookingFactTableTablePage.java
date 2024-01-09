@@ -7,6 +7,8 @@ import ch.nteinno.frwdeluxe.frwdeluxe.shared.bookingfact.BookingFactTableTablePa
 import ch.nteinno.frwdeluxe.frwdeluxe.shared.bookingfact.IBookingFactTableService;
 import ch.nteinno.frwdeluxe.frwdeluxe.shared.reveal.IRevealService;
 import org.eclipse.scout.rt.client.dto.Data;
+import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
+import org.eclipse.scout.rt.client.ui.action.keystroke.IKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
@@ -22,6 +24,7 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.html.HTML;
+import org.eclipse.scout.rt.platform.html.IHtmlElement;
 import org.eclipse.scout.rt.platform.text.TEXTS;
 import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
@@ -123,6 +126,10 @@ public class BookingFactTableTablePage extends AbstractFrwDeluxeTablePage<Table>
       return getColumnSet().getColumnByClass(ShouldColumn.class);
     }
 
+    private IHtmlElement getRevealCellHtml(String text) {
+      return HTML.span(text).cssClass("text");
+    }
+
     @Order(1000)
     @ClassId("57d0f161-9b3f-4082-81a5-5e24eac522e8")
     public class KeyColumn extends AbstractLongColumn {
@@ -213,9 +220,9 @@ public class BookingFactTableTablePage extends AbstractFrwDeluxeTablePage<Table>
       @Override
       protected void execDecorateCell(Cell cell, ITableRow row) {
         if (!getRevealedHaveColumn().getValue(row)) {
-          cell.setText(HTML.appLink("HAVE", TEXTS.get("ClickToReveal")).toHtml());
+          cell.setText(getRevealCellHtml(TEXTS.get("ClickToReveal")).appLink("HAVE").addCssClass("app-link").toHtml());
         } else {
-          cell.setText(HTML.span(getHaveColumn().getValue(row)).cssClass("text").toHtml());
+          cell.setText(getRevealCellHtml(getHaveColumn().getValue(row)).toHtml());
         }
       }
 
@@ -303,6 +310,31 @@ public class BookingFactTableTablePage extends AbstractFrwDeluxeTablePage<Table>
       protected void execAction() {
         BEANS.get(IRevealService.class).unrevealBookingFacts(getKeyColumn().getValues());
         reloadPage();
+      }
+    }
+
+    @Order(1000)
+    @ClassId("ffb59f48-9fec-4b38-820d-a878081bce9c")
+    public class RevealKeyStroke extends AbstractKeyStroke {
+      @Override
+      protected String getConfiguredKeyStroke() {
+        return IKeyStroke.SPACE;
+      }
+
+      @Override
+      protected void execAction() {
+        if (getSelectedRow() == null) {
+          return;
+        }
+        boolean shouldRevealed = getRevealedShouldColumn().getValue(getSelectedRow());
+        boolean haveRevealed = getRevealedHaveColumn().getValue(getSelectedRow());
+        if (!shouldRevealed) {
+          execAppLinkAction("SHOULD");
+        } else if (!haveRevealed) {
+          execAppLinkAction("HAVE");
+        } else {
+          selectNextRow();
+        }
       }
     }
   }

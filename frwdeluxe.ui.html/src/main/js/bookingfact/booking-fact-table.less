@@ -1,9 +1,11 @@
 .booking-fact-table {
   & > .table-data > .table-row > .table-cell {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    & > * {
+      padding: 40px 0;
+      display: block;
+    }
 
-    & > .text, & > .app-link {
+    .text, .app-link {
       font-size: @font-size-large + 5;
     }
   }
