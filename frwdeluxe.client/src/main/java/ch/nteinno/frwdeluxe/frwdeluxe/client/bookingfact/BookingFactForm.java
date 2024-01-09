@@ -160,6 +160,11 @@ public class BookingFactForm extends AbstractForm {
           protected int getConfiguredGridH() {
             return 2;
           }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
         }
       }
 
@@ -189,6 +194,11 @@ public class BookingFactForm extends AbstractForm {
           protected String getConfiguredLabel() {
             return TEXTS.get("Should");
           }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
+          }
         }
 
         @Order(3000)
@@ -197,6 +207,11 @@ public class BookingFactForm extends AbstractForm {
           @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Have");
+          }
+
+          @Override
+          protected boolean getConfiguredMandatory() {
+            return true;
           }
         }
       }
