@@ -28,6 +28,12 @@ import java.util.Set;
 @Data(ChapterTableTablePageData.class)
 @ClassId("cfd26390-1796-4bcc-af9d-b9f66bfa55e7")
 public class ChapterTablePage extends AbstractFrwDeluxeTablePage<Table> {
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Folder;
+  }
+
   @Override
   protected boolean getConfiguredLeaf() {
     return false;

@@ -1,9 +1,12 @@
 package ch.nteinno.frwdeluxe.frwdeluxe.server;
 
+import org.eclipse.scout.rt.platform.nls.NlsLocale;
 import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.session.ServerSessionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Locale;
 
 /**
  * @author nsd
@@ -13,8 +16,11 @@ public class ServerSession extends AbstractServerSession {
   private static final long serialVersionUID = 1L;
   private static final Logger LOG = LoggerFactory.getLogger(ServerSession.class);
 
+  public final Locale DEFAULT_LOCALE = Locale.forLanguageTag("de-ch");
+
   public ServerSession() {
     super(true);
+    NlsLocale.set(DEFAULT_LOCALE);
   }
 
   /**

@@ -1,5 +1,6 @@
 package ch.nteinno.frwdeluxe.frwdeluxe.client.quiz;
 
+import ch.nteinno.frwdeluxe.frwdeluxe.client.common.AbstractFrwDeluxeTablePage;
 import ch.nteinno.frwdeluxe.frwdeluxe.client.quiz.QuizTableTablePage.Table;
 import ch.nteinno.frwdeluxe.frwdeluxe.shared.Icons;
 import ch.nteinno.frwdeluxe.frwdeluxe.shared.quiz.IQuizTableService;
@@ -9,7 +10,6 @@ import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
-import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
@@ -21,10 +21,16 @@ import java.util.Set;
 
 @Data(QuizTableTablePageData.class)
 @ClassId("7293c1da-71d5-4ad6-8ef9-1125db466681")
-public class QuizTableTablePage extends AbstractPageWithTable<Table> {
+public class QuizTableTablePage extends AbstractFrwDeluxeTablePage<Table> {
+
+  @Override
+  protected String getConfiguredIconId() {
+    return Icons.Search;
+  }
+
   @Override
   protected boolean getConfiguredLeaf() {
-    return true;
+    return false;
   }
 
   @Override

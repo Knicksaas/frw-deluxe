@@ -1,43 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/frwdeluxe.client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.client/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe.server.app.dev/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.server.app.dev/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe.server.app.war/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.server.app.war/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.shared/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.shared/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe.ui.html.app.dev/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.ui.html.app.dev/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe.ui.html.app.war/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.ui.html.app.war/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.ui.html/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/frwdeluxe.ui.html/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.client/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.client/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.server.app.dev/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.server.app.dev/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.server.app.war/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.server.app.war/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.server/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.shared/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.shared/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.ui.html.app.dev/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.ui.html.app.dev/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.ui.html.app.war/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.ui.html.app.war/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.ui.html/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe.ui.html/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/frwdeluxe/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/frwdeluxe/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

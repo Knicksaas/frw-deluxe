@@ -8,6 +8,11 @@ import org.eclipse.scout.rt.client.ui.form.FormListener;
 public abstract class AbstractFrwDeluxeTablePage<T extends ITable> extends AbstractPageWithTable<T> implements FormListener {
 
   @Override
+  protected String getConfiguredOverviewIconId() {
+    return getConfiguredIconId();
+  }
+
+  @Override
   public void formChanged(FormEvent e) {
     if (FormEvent.TYPE_CLOSED == e.getType() && e.getForm().isFormStored()) {
       reloadPage();

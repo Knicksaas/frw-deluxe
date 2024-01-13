@@ -48,6 +48,11 @@ public class BookingFactTableTablePage extends AbstractFrwDeluxeTablePage<Table>
   }
 
   @Override
+  protected String getConfiguredIconId() {
+    return Icons.File;
+  }
+
+  @Override
   protected boolean getConfiguredLeaf() {
     return true;
   }
