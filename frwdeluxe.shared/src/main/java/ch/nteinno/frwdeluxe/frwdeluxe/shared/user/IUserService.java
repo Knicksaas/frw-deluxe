@@ -15,4 +15,8 @@ public interface IUserService extends IService {
     UserFormData store(UserFormData formData);
 
     boolean checkCredentials(String username, String passwordHash);
+
+    boolean isUsernameAvailable(String username);
+
+    void createUser(String username, String password);
 }
