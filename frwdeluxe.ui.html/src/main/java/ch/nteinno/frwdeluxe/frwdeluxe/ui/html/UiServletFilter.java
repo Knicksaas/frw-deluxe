@@ -1,7 +1,6 @@
 package ch.nteinno.frwdeluxe.frwdeluxe.ui.html;
 
 import org.eclipse.scout.rt.platform.BEANS;
-import org.eclipse.scout.rt.platform.security.ConfigFileCredentialVerifier;
 import org.eclipse.scout.rt.server.commons.authentication.DevelopmentAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController;
 import org.eclipse.scout.rt.server.commons.authentication.FormBasedAccessController.FormBasedAuthConfig;
@@ -28,12 +27,12 @@ public class UiServletFilter implements Filter {
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     m_trivialAccessController = BEANS.get(TrivialAccessController.class)
-      .init(new TrivialAuthConfig()
-        .withExclusionFilter(filterConfig.getInitParameter("filter-exclude"))
-        .withLoginPageInstalled(true));
+            .init(new TrivialAuthConfig()
+                    .withExclusionFilter(filterConfig.getInitParameter("filter-exclude"))
+                    .withLoginPageInstalled(true));
     m_formBasedAccessController = BEANS.get(FormBasedAccessController.class)
-      .init(new FormBasedAuthConfig()
-        .withCredentialVerifier(BEANS.get(ConfigFileCredentialVerifier.class)));
+            .init(new FormBasedAuthConfig()
+                    .withCredentialVerifier(BEANS.get(FrwDeluxeCredentialVerifier.class)));
     m_developmentAccessController = BEANS.get(DevelopmentAccessController.class).init();
   }
 
