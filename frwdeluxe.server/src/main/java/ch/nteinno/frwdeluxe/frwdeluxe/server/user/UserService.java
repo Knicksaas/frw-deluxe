@@ -13,26 +13,46 @@ import org.eclipse.scout.rt.server.jdbc.SQL;
 public class UserService implements IUserService {
     @Override
     public UserFormData prepareCreate(UserFormData formData) {
-        if (!ACCESS.check(new CreateUserPermission())) {
-            throw new VetoException(TEXTS.get("AuthorizationFailed"));
-        }
-        return formData;
+      if (!ACCESS.check(new CreateUserPermission())) {
+        throw new VetoException(TEXTS.get("AuthorizationFailed"));
+      }
+
+
+      return formData;
     }
 
     @Override
     public UserFormData create(UserFormData formData) {
-        if (!ACCESS.check(new CreateUserPermission())) {
-            throw new VetoException(TEXTS.get("AuthorizationFailed"));
-        }
-        return formData;
+      if (!ACCESS.check(new CreateUserPermission())) {
+        throw new VetoException(TEXTS.get("AuthorizationFailed"));
+      }
+
+      String username = formData.getUsername().getValue();
+      String password = formData.getPassword().getValue();
+
+      if (StringUtility.isNullOrEmpty(password)) {
+        throw new VetoException(TEXTS.get("PasswordMustNotBeEmpty"));
+      }
+
+      createUser(username, password);
+
+      return formData;
     }
 
     @Override
     public UserFormData load(UserFormData formData) {
-        if (!ACCESS.check(new ReadUserPermission())) {
-            throw new VetoException(TEXTS.get("AuthorizationFailed"));
-        }
-        return formData;
+      if (!ACCESS.check(new ReadUserPermission())) {
+        throw new VetoException(TEXTS.get("AuthorizationFailed"));
+      }
+
+      NVPair userNrBind = new NVPair("userNr", formData.getUserNr());
+
+      SQL.selectInto("select username, '111111111' " +
+        "from \"user\" " +
+        "where user_nr = :userNr" +
+        "into :username, :password", formData, userNrBind);
+
+      return formData;
     }
 
     @Override
@@ -68,13 +88,13 @@ public class UserService implements IUserService {
 
     @Override
     public boolean isUsernameAvailable(String username) {
-        return getUserNumberByUsername(username) != null;
+      return getUserNumberByUsername(username) == null;
     }
 
     @Override
     public void createUser(String username, String password) {
       if (!isUsernameAvailable(username)) {
-        return;
+        throw new VetoException(TEXTS.get("ThisUsernameIsAlreadyTaken"));
       }
 
       byte[] salt = SecurityUtility.createRandomBytes();

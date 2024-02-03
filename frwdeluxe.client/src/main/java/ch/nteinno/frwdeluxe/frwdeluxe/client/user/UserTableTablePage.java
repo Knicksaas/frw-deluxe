@@ -7,6 +7,10 @@ import ch.nteinno.frwdeluxe.frwdeluxe.shared.user.IUserTableService;
 import ch.nteinno.frwdeluxe.frwdeluxe.shared.user.ReadUserPermission;
 import ch.nteinno.frwdeluxe.frwdeluxe.shared.user.UserTableTablePageData;
 import org.eclipse.scout.rt.client.dto.Data;
+import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.AbstractTable;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
@@ -14,7 +18,10 @@ import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Order;
 import org.eclipse.scout.rt.platform.classid.ClassId;
 import org.eclipse.scout.rt.platform.text.TEXTS;
+import org.eclipse.scout.rt.platform.util.CollectionUtility;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
+
+import java.util.Set;
 
 @Data(UserTableTablePageData.class)
 @ClassId("16cb9de9-60e7-432e-a854-3b47d57ba95c")
@@ -47,6 +54,11 @@ public class UserTableTablePage extends AbstractFrwDeluxeTablePage<Table> {
 
   @ClassId("17234193-9518-413b-a274-ced3e18ce4a2")
   public class Table extends AbstractTable {
+
+    @Override
+    protected Class<? extends IMenu> getConfiguredDefaultMenu() {
+      return EditUserMenu.class;
+    }
 
     @Override
     protected boolean getConfiguredAutoResizeColumns() {
@@ -111,5 +123,59 @@ public class UserTableTablePage extends AbstractFrwDeluxeTablePage<Table> {
         return -1;
       }
     }
+
+    @Order(1000)
+    @ClassId("8d93df87-e321-4274-ab60-5e56bbe8e90f")
+    public class AddUserMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("AddUser");
+      }
+
+      @Override
+      protected String getConfiguredIconId() {
+        return Icons.Plus;
+      }
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.EmptySpace);
+      }
+
+      @Override
+      protected void execAction() {
+        UserForm form = new UserForm();
+        form.addFormListener(UserTableTablePage.this);
+        form.startNew();
+      }
+    }
+
+    @Order(2000)
+    @ClassId("82c93c11-b8f3-4deb-9488-f07129992ea7")
+    public class EditUserMenu extends AbstractMenu {
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("EditUser");
+      }
+
+      @Override
+      protected String getConfiguredIconId() {
+        return Icons.Pencil;
+      }
+
+      @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.hashSet(TableMenuType.SingleSelection);
+      }
+
+      @Override
+      protected void execAction() {
+        UserForm form = new UserForm();
+        form.addFormListener(UserTableTablePage.this);
+        form.setUserNr(getUserNrColumn().getSelectedValue());
+        form.startModify();
+      }
+    }
   }
 }
+
