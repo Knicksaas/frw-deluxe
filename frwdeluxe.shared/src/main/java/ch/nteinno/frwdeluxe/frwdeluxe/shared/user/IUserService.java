@@ -8,15 +8,17 @@ public interface IUserService extends IService {
 
     UserFormData prepareCreate(UserFormData formData);
 
-    UserFormData create(UserFormData formData);
+  UserFormData create(UserFormData formData);
 
-    UserFormData load(UserFormData formData);
+  UserFormData load(UserFormData formData);
 
-    UserFormData store(UserFormData formData);
+  UserFormData store(UserFormData formData);
 
-    boolean checkCredentials(String username, String passwordHash);
+  boolean checkCredentials(String username, String passwordHash);
 
-    boolean isUsernameAvailable(String username);
+  boolean isUsernameAvailable(String username);
 
-    void createUser(String username, String password);
+  void createUser(String username, String password);
+
+  Long getUserNumberByUsername(String username);
 }

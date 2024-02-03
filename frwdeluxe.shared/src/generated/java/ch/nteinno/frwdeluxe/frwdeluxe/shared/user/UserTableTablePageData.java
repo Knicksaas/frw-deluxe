@@ -50,6 +50,36 @@ public class UserTableTablePageData extends AbstractTablePageData {
     }
 
     public static class UserTableTableRowData extends AbstractTableRowData {
-        private static final long serialVersionUID = 1L;
+      private static final long serialVersionUID = 1L;
+      public static final String userNr = "userNr";
+      public static final String username = "username";
+      public static final String status = "status";
+      private Long m_userNr;
+      private String m_username;
+      private Long m_status;
+
+      public Long getUserNr() {
+        return m_userNr;
+      }
+
+      public void setUserNr(Long newUserNr) {
+        m_userNr = newUserNr;
+      }
+
+      public String getUsername() {
+        return m_username;
+      }
+
+      public void setUsername(String newUsername) {
+        m_username = newUsername;
+      }
+
+      public Long getStatus() {
+        return m_status;
+      }
+
+      public void setStatus(Long newStatus) {
+        m_status = newStatus;
+      }
     }
 }

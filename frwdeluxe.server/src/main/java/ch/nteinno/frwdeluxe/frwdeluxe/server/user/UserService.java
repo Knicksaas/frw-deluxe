@@ -68,33 +68,42 @@ public class UserService implements IUserService {
 
     @Override
     public boolean isUsernameAvailable(String username) {
-        if (StringUtility.isNullOrEmpty(username)) {
-            return false;
-        }
-
-        NVPair usernamePair = new NVPair("username", username);
-        Object[][] result = SQL.select("""
-                select 1 from "user" where username = :username
-                """, usernamePair);
-
-        return result.length == 0;
+        return getUserNumberByUsername(username) != null;
     }
 
     @Override
     public void createUser(String username, String password) {
-        if (!isUsernameAvailable(username)) {
-            return;
-        }
+      if (!isUsernameAvailable(username)) {
+        return;
+      }
 
-        byte[] salt = SecurityUtility.createRandomBytes();
-        byte[] passwordHash = SecurityUtility.hashPassword(password.toCharArray(), salt);
+      byte[] salt = SecurityUtility.createRandomBytes();
+      byte[] passwordHash = SecurityUtility.hashPassword(password.toCharArray(), salt);
 
-        NVPair usernameBind = new NVPair("username", username);
-        NVPair passwordHashBind = new NVPair("passwordHash", Base64Utility.encode(passwordHash));
-        NVPair saltBind = new NVPair("salt", Base64Utility.encode(salt));
-        SQL.insert("""
-                INSERT INTO "user" (username, password_hash, password_salt, status_uid)
-                VALUES (:username, :passwordHash, :salt, 101);
-                """, usernameBind, passwordHashBind, saltBind);
+      NVPair usernameBind = new NVPair("username", username);
+      NVPair passwordHashBind = new NVPair("passwordHash", Base64Utility.encode(passwordHash));
+      NVPair saltBind = new NVPair("salt", Base64Utility.encode(salt));
+      SQL.insert("""
+        INSERT INTO "user" (username, password_hash, password_salt, status_uid)
+        VALUES (:username, :passwordHash, :salt, 101);
+        """, usernameBind, passwordHashBind, saltBind);
     }
+
+  @Override
+  public Long getUserNumberByUsername(String username) {
+    if (StringUtility.isNullOrEmpty(username)) {
+      return null;
+    }
+
+    NVPair usernamePair = new NVPair("username", username);
+    Object[][] result = SQL.select("""
+      select user_nr from "user" where username = :username
+      """, usernamePair);
+
+    if (result.length < 1) {
+      return null;
+    }
+
+    return ((Long) result[0][0]);
+  }
 }

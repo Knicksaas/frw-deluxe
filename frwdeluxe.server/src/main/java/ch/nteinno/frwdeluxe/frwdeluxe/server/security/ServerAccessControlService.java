@@ -1,6 +1,7 @@
 package ch.nteinno.frwdeluxe.frwdeluxe.server.security;
 
 import ch.nteinno.frwdeluxe.frwdeluxe.shared.security.AccessControlService;
+import ch.nteinno.frwdeluxe.frwdeluxe.shared.user.ReadUserPermission;
 import org.eclipse.scout.rt.platform.BEANS;
 import org.eclipse.scout.rt.platform.Replace;
 import org.eclipse.scout.rt.security.DefaultPermissionCollection;
@@ -19,7 +20,9 @@ public class ServerAccessControlService extends AccessControlService {
     IPermissionCollection permissions = BEANS.get(DefaultPermissionCollection.class);
     permissions.add(new RemoteServiceAccessPermission("*.shared.*", "*"), PermissionLevel.ALL);
 
-    //TODO [nsd]: Fill access control service - or replace this default implementation by simply return BEANS.get(AllPermissionCollection.class)
+    if (userId.equals("admin")) {
+      permissions.add(new ReadUserPermission(), PermissionLevel.ALL);
+    }
 
     permissions.setReadOnly();
     return permissions;
